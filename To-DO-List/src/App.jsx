@@ -8,9 +8,14 @@ function App() {
   const [tasks , setTasks] = useState([{}]);
   
   const addTask = () =>{
-    if(inputs.value.trim() === '') return;
+    if(inputs.trim() === '') return;
     setTasks([...tasks , {task:inputs , id:crypto.randomUUID()}]);
     setInputs('');
+  };
+
+  const Delete = (id)=>{
+      
+      setTasks(tasks.filter(task => task.id !==id));
   }
   return (
     <>
@@ -23,7 +28,7 @@ function App() {
         return(
           <div className="list" key={tas.id}>
             <li>{tas.task}</li>
-            <button>delete</button>
+            <button onClick={() =>{Delete(tas.id)}}>delete</button>
           </div>
         )
       })}
